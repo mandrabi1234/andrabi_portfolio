@@ -1,0 +1,9 @@
+# Render Blueprint: deploys this repo as a free static site.
+# In Render: New → Blueprint → pick this repo. Or create a Static Site by hand
+# with the same build command and publish directory.
+services:
+  - type: web
+    runtime: static
+    name: andrabi-portfolio
+    buildCommand: npm ci && npm run build
+    staticPublishPath: out
