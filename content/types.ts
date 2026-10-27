@@ -48,3 +48,61 @@ export type Education = {
 	period: string;
 	details?: string[];
 };
+
+export type ServiceTier = {
+	/** Short id used for anchors, e.g. "project" → /services#project. */
+	id: string;
+	name: string;
+	/** Main price line, e.g. "$125". */
+	price: string;
+	/** Text after the price, e.g. "/ hour". */
+	unit?: string;
+	/** Secondary price line, e.g. "$150/hr for sports analytics & AI". */
+	priceNote?: string;
+	/** One sentence on who this tier is for. */
+	bestFor: string;
+	/** What's included; shown on the services page and (first 3) on the home card. */
+	includes: string[];
+	/** Optional sized options within the tier, shown on the services page. */
+	options?: { name: string; price: string; description: string }[];
+	/** Highlights this tier as the recommended one. */
+	featured?: boolean;
+	/** Label on the featured tier's badge; defaults to "Recommended". */
+	badge?: string;
+};
+
+/** A lower-priced track for small organizations and tight budgets. */
+export type CommunityTrack = {
+	/** false hides this track (the rest of the services module is unaffected). */
+	enabled: boolean;
+	title: string;
+	intro: string;
+	/** Who qualifies. */
+	eligibility: string[];
+	/** What makes the lower price workable (the trade-offs). */
+	howItStaysAffordable: string[];
+	tiers: ServiceTier[];
+	terms: string[];
+	/** e.g. "I take on one or two community projects at a time." */
+	availability?: string;
+	/** Subject prefix for emails from this track. */
+	emailSubject: string;
+};
+
+export type Services = {
+	/** false hides the whole module: home-page section, nav link and /services page. */
+	enabled: boolean;
+	/** false replaces every price with `hiddenPriceLabel` but keeps the tiers. */
+	showPrices: boolean;
+	hiddenPriceLabel: string;
+	title: string;
+	intro: string;
+	/** What kinds of work you take on, shown as tags. */
+	offerings: string[];
+	tiers: ServiceTier[];
+	process: { step: string; description: string }[];
+	terms: string[];
+	faqs: { question: string; answer: string }[];
+	community: CommunityTrack;
+	cta: { label: string; emailSubject: string; note?: string };
+};

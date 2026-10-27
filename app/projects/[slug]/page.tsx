@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import profile from '@/content/profile';
 import Markdown from '@/app/components/Markdown';
 import ProjectGallery from '@/app/components/ProjectGallery';
+import SiteHeader from '@/app/components/SiteHeader';
 import { getAdjacentProjects, getAllProjects, getProject } from '@/lib/projects';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -49,16 +50,7 @@ export default async function ProjectPage({ params }: Props) {
 
 	return (
 		<main className="min-h-screen bg-white dark:bg-gray-900">
-			<header className="sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 backdrop-blur">
-				<div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
-					<Link href="/#projects" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-						← All projects
-					</Link>
-					<Link href="/" className="text-sm font-medium text-gray-900 dark:text-white">
-						{profile.name}
-					</Link>
-				</div>
-			</header>
+			<SiteHeader backHref="/#projects" backLabel="All projects" />
 
 			<article className="max-w-3xl mx-auto px-6 py-10 space-y-10">
 				<div className="space-y-4">

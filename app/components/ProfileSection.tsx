@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import profile from '@/content/profile';
+import Link from 'next/link';
+import services from '@/content/services';
 import SocialLinks from './SocialLinks';
 
 const ProfileSection = () => {
@@ -37,6 +39,15 @@ const ProfileSection = () => {
 						<span className="text-sm text-gray-600 dark:text-gray-400">{profile.location}</span>
 					</div>
 
+					<div className="flex flex-wrap items-center justify-center gap-2">
+					{services.enabled && (
+						<Link
+							href="/services/"
+							className="inline-block px-4 py-1.5 text-sm font-medium rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:opacity-90"
+						>
+							Work with me
+						</Link>
+					)}
 					{profile.resumeUrl && (
 						<a
 							href={profile.resumeUrl}
@@ -47,6 +58,7 @@ const ProfileSection = () => {
 							Download resume
 						</a>
 					)}
+					</div>
 
 					<div className="pt-2">
 						<SocialLinks />

@@ -7,7 +7,8 @@ Next.js + Tailwind portfolio. All content lives in `/content`, so you rarely nee
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build      # production build (also checks every project file)
+npm run build      # builds the static site into /out (also checks every project file)
+npm start          # serves /out locally to preview the real deployed site
 ```
 
 ## Where everything lives
@@ -18,6 +19,7 @@ npm run build      # production build (also checks every project file)
 | Experience (resume entries) | `content/experience.ts` |
 | Skills | `content/skills.ts` |
 | Education | `content/education.ts` |
+| Consulting services & pricing | `content/services.ts` |
 | Projects (one file each) | `content/projects/<slug>.md` |
 | Project screenshots | `public/projects/<slug>/` |
 | Section order on the home page | `app/page.tsx` |
@@ -68,6 +70,20 @@ links from that role to its project pages:
 
 If you're promoted within a company, add `previousRoles: [{ role: 'Software Engineer', period: '2022 – 2026' }]`.
 
+## Services & pricing
+
+Everything on the "Work With Me" section and the `/services` page comes from `content/services.ts`:
+the intro, the three tiers (Advisory, Project, Retainer) with their prices and options, the process
+steps, terms, FAQs and the call-to-action email subject.
+
+- Change a price: edit its string (e.g. `price: '$150'`).
+- Hide all prices but keep the tiers: `showPrices: false` (shows "Contact for pricing").
+- Remove the module entirely (home section, "Work with me" button and `/services`): `enabled: false`.
+- Mark the recommended tier with `featured: true` (badge text via `badge`, default "Recommended").
+- **Community & Small Teams** (lower-priced track for small organizations) lives under `community` in
+  the same file: who qualifies, the trade-offs that keep it affordable, its own three tiers and terms.
+  Set `community.enabled: false` to hide just that track.
+
 ## Add a downloadable resume
 
 Put the PDF in `public/` (e.g. `public/Mohi_Andrabi_Resume.pdf`) and set
@@ -76,5 +92,14 @@ under your contact details.
 
 ## Deploy
 
-Push to GitHub and import the repo in [Vercel](https://vercel.com); it detects Next.js
-automatically. Once you have a domain, set `siteUrl` in `content/profile.ts` for correct link previews.
+The site builds to plain HTML files in `out/` (see `next.config.ts`), so it runs on any static host.
+
+**Render (Static Site):**
+- Build command: `npm ci && npm run build`
+- Publish directory: `out`
+
+`render.yaml` holds the same settings, so you can also create it with New → Blueprint.
+
+**Vercel / Netlify:** import the repo; both detect Next.js and the `out/` folder automatically.
+
+Once you have a domain, set `siteUrl` in `content/profile.ts` for correct link previews.

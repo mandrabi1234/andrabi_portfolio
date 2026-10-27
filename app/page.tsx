@@ -4,6 +4,7 @@ import SkillsSection from './components/SkillsSection';
 import ExperienceSection from './components/ExperienceSection';
 import ProjectsSection from './components/ProjectsSection';
 import EducationSection from './components/EducationSection';
+import ServicesSection from './components/ServicesSection';
 import { getProjectsByCategory } from '@/lib/projects';
 
 // Content lives in /content. To reorder sections, move the lines below.
@@ -23,6 +24,7 @@ export default function Home() {
 						<ExperienceSection />
 						<ProjectsSection title="Select Professional Projects" id="projects" projects={getProjectsByCategory('professional')} />
 						<ProjectsSection title="Select Personal Projects" id="personal-projects" projects={getProjectsByCategory('personal')} />
+						<ServicesSection />
 						<SkillsSection />
 						<EducationSection />
 					</div>
